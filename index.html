@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>徐寒洁 Hanjie Xu - 个人介绍</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --sky-50: #F0F7FF;
+      --sky-100: #E0EFFF;
+      --sky-200: #B9DAFE;
+      --sky-300: #7CBCF8;
+      --sky-400: #4A9FEF;
+      --sky-500: #2B7FD9;
+      --sky-600: #1A64B5;
+      --sky-700: #154D8E;
+      --sky-800: #163B64;
+      --sky-900: #0F2B4A;
+      --blue-accent: #3B82F6;
+      --blue-deep: #1E40AF;
+      --teal: #0EA5E9;
+      --navy: #0C1E3A;
+      --text: #1E293B;
+      --text-light: #64748B;
+      --white: #FFFFFF;
+      --light-bg: #F8FAFF;
+      --card-shadow: 0 4px 24px rgba(30,64,175,.07);
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,.85); backdrop-filter: blur(16px) saturate(1.6);
+      border-bottom: 1px solid rgba(59,130,246,.06);
+      transition: all .4s cubic-bezier(.4,0,.2,1);
+    }
+    nav.scrolled { box-shadow: 0 1px 20px rgba(59,130,246,.1); }
+    .nav-inner {
+      max-width: 960px; margin: 0 auto; padding: 14px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo {
+      font-weight: 800; font-size: 1rem; letter-spacing: -.02em;
+      background: linear-gradient(135deg, var(--sky-500), var(--teal));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-light); font-size: .85rem; font-weight: 500;
+      transition: all .25s; position: relative;
+    }
+    .nav-links a::after {
+      content: ""; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+      background: linear-gradient(90deg, var(--sky-400), var(--teal));
+      border-radius: 1px; transition: width .3s cubic-bezier(.4,0,.2,1);
+    }
+    .nav-links a:hover { color: var(--sky-500); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 120px 24px 80px;
+      background: var(--sky-50);
+      color: var(--navy); position: relative; overflow: hidden;
+    }
+    .hero-bg-img {
+      position: absolute; inset: 0;
+      background-image: url('hero-bg.jpg');
+      background-size: cover; background-position: center;
+      opacity: 1;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg,
+        rgba(255,255,255,.15) 0%,
+        rgba(255,255,255,.05) 30%,
+        rgba(255,255,255,.08) 60%,
+        rgba(255,255,255,.25) 100%
+      );
+    }
+    .hero-content {
+      max-width: 720px; text-align: center; position: relative; z-index: 2;
+    }
+    .hero-name {
+      font-size: 3.4rem; font-weight: 800; letter-spacing: -.03em; margin-bottom: 8px;
+      color: var(--sky-800);
+      opacity: 0; transform: translateY(40px);
+      animation: heroRise 1.2s cubic-bezier(.16,1,.3,1) .2s forwards;
+    }
+    .hero-name-en {
+      font-size: 1.5rem; font-weight: 300; color: var(--sky-600); margin-bottom: 28px;
+      opacity: 0; transform: translateY(40px);
+      animation: heroRise 1.2s cubic-bezier(.16,1,.3,1) .5s forwards;
+    }
+    .hero-tagline {
+      font-size: 1.15rem; line-height: 1.9; color: var(--sky-700); font-weight: 400;
+      opacity: 0; transform: translateY(40px);
+      animation: heroRise 1.2s cubic-bezier(.16,1,.3,1) .8s forwards;
+    }
+    .hero-tagline span {
+      background: linear-gradient(135deg, var(--sky-600), var(--teal));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; font-weight: 700;
+    }
+    @keyframes heroRise {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-scroll {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      z-index: 2; animation: bounce 2s ease-in-out infinite;
+    }
+    .hero-scroll svg { width: 24px; height: 24px; stroke: var(--sky-400); }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ── Sections ── */
+    section { padding: 80px 24px; }
+    .container { max-width: 800px; margin: 0 auto; }
+    .section-label {
+      font-size: .72rem; text-transform: uppercase; letter-spacing: .14em;
+      color: var(--teal); font-weight: 700; margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 1.75rem; font-weight: 800; margin-bottom: 40px; letter-spacing: -.02em;
+      color: var(--sky-800);
+    }
+
+    /* ── Decorative tech line ── */
+    .tech-divider {
+      width: 100%; height: 1px; margin: 0 auto 48px;
+      background: linear-gradient(90deg, transparent, var(--sky-300), var(--teal), transparent);
+      opacity: .4;
+    }
+
+    /* ── About ── */
+    .about-card {
+      background: var(--white); border-radius: 20px; padding: 40px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(59,130,246,.06);
+      display: grid; grid-template-columns: 1fr; gap: 32px;
+      position: relative; overflow: hidden;
+    }
+    .about-card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--sky-400), var(--teal));
+    }
+    .about-text { font-size: .95rem; line-height: 1.9; color: var(--text); }
+    .about-text p { margin-bottom: 12px; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text-en {
+      font-size: .9rem; line-height: 1.8; color: var(--text-light);
+      border-top: 1px solid rgba(59,130,246,.08); padding-top: 24px;
+    }
+    .lang-tag {
+      display: inline-block; font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; padding: 3px 12px; border-radius: 20px; margin-bottom: 12px;
+    }
+    .lang-zh { background: rgba(59,130,246,.08); color: var(--sky-600); }
+    .lang-en { background: rgba(14,165,233,.08); color: var(--teal); }
+
+    /* ── Timeline ── */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ""; position: absolute; left: 7px; top: 12px; bottom: 12px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--sky-400), var(--teal));
+    }
+    .timeline-item { position: relative; margin-bottom: 52px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot {
+      position: absolute; left: -32px; top: 6px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--white); border: 3px solid var(--sky-400);
+      box-shadow: 0 0 0 4px rgba(59,130,246,.12);
+      transition: all .3s;
+    }
+    .timeline-item:nth-child(2) .timeline-dot {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(14,165,233,.12);
+    }
+    .timeline-item:hover .timeline-dot {
+      transform: scale(1.2);
+      box-shadow: 0 0 0 6px rgba(59,130,246,.18);
+    }
+    .timeline-item:nth-child(2):hover .timeline-dot {
+      box-shadow: 0 0 0 6px rgba(14,165,233,.18);
+    }
+    .timeline-company { font-size: 1.15rem; font-weight: 700; color: var(--sky-800); margin-bottom: 2px; }
+    .timeline-desc { font-size: .9rem; line-height: 1.85; color: var(--text); margin-bottom: 16px; }
+    .timeline-highlights { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .timeline-highlights li {
+      position: relative; padding-left: 20px; font-size: .88rem; line-height: 1.75; color: var(--text);
+    }
+    .timeline-highlights li::before {
+      content: ""; position: absolute; left: 2px; top: 10px;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--sky-400), var(--teal));
+    }
+
+    /* ── Advantages ── */
+    .advantage-cards { display: grid; gap: 20px; }
+    .adv-card {
+      background: var(--white); border-radius: 16px; padding: 32px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(59,130,246,.06);
+      position: relative; overflow: hidden;
+      transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s;
+    }
+    .adv-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(59,130,246,.1);
+    }
+    .adv-card::before {
+      content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+    }
+    .adv-card:nth-child(1)::before { background: linear-gradient(to bottom, var(--sky-400), var(--sky-300)); }
+    .adv-card:nth-child(2)::before { background: linear-gradient(to bottom, var(--teal), #38BDF8); }
+    .adv-card:nth-child(3)::before { background: linear-gradient(to bottom, var(--sky-500), var(--teal)); }
+    .adv-text { font-size: .88rem; line-height: 1.85; color: var(--text); }
+
+    /* ── Closing ── */
+    .closing {
+      text-align: center; padding: 88px 24px 64px;
+      position: relative; overflow: hidden;
+      background: linear-gradient(180deg, var(--sky-50) 0%, var(--white) 100%);
+    }
+    .closing-text {
+      max-width: 640px; margin: 0 auto; font-size: 1.3rem; line-height: 2.1;
+      color: var(--sky-800); position: relative; z-index: 1; font-weight: 600;
+      letter-spacing: .02em;
+    }
+    .closing-sig {
+      margin-top: 28px; font-weight: 800; font-size: 1.4rem;
+      position: relative; z-index: 1;
+    }
+    .closing-sig span {
+      background: linear-gradient(135deg, var(--sky-500), var(--teal));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Contact ── */
+    .contact {
+      background: linear-gradient(160deg, var(--sky-800) 0%, var(--sky-900) 50%, var(--navy) 100%);
+      color: var(--white); padding: 56px 24px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .contact-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 24px; position: relative; z-index: 1; }
+    .contact-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; position: relative; z-index: 1; }
+    .contact-item {
+      font-size: .9rem; opacity: .85; text-decoration: none; color: var(--white);
+      transition: all .2s;
+    }
+    .contact-item:hover { opacity: 1; transform: translateY(-2px); }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--navy); color: rgba(255,255,255,.3);
+      text-align: center; padding: 16px; font-size: .72rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .hero-name { font-size: 2.4rem; }
+      .hero-name-en { font-size: 1.1rem; }
+      .hero-tagline { font-size: .95rem; }
+      section { padding: 56px 16px; }
+      .about-card { padding: 24px; }
+      .adv-card { padding: 24px; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: .78rem; }
+    }
+
+    /* ── Reveal Animation ── */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">Hanjie Xu</div>
+    <div class="nav-links">
+      <a href="#about">关于我</a>
+      <a href="#career">职业亮点</a>
+      <a href="#advantages">我的优势</a>
+      <a href="#contact">联系</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-name">徐寒洁</div>
+    <div class="hero-name-en">Hanjie Xu</div>
+    <div class="hero-tagline">
+      19年人力资源专家｜<span>薪酬激励</span>・<span>全球化HR</span>・<span>从0到1体系搭建</span>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M19 12l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" style="background: var(--light-bg);">
+  <div class="container">
+    <div class="section-label reveal">About</div>
+    <div class="section-title reveal">关于我</div>
+    <div class="about-card reveal">
+      <div>
+        <span class="lang-tag lang-zh">中文</span>
+        <div class="about-text">
+          <p>拥有19年人力资源相关深耕经验，其中13年任职上市公司集团总部及产业管理中心核心管理岗位。</p>
+          <p>累计6年国际化HR履职经验：2010年从外籍员工基础人事事务干起，到2011年光伏国际独立负责薪酬及派遣政策制定与实施；2020-2024任职吉利奔驰smart全球合资公司，独立从0到1搭建覆盖中国、欧洲十余法律实体的薪酬福利、绩效激励、国际派遣、HR信息系统全链路体系。</p>
+          <p>深刻理解跨国跨文化用工合规、海外薪酬体系设计、国际派遣全流程管控，具备集团层面顶层制度设计、体系落地与全球化人力管控的实战能力。</p>
+        </div>
+      </div>
+      <div>
+        <span class="lang-tag lang-en">English</span>
+        <div class="about-text-en">
+          19 years of deep HR expertise, including 13 years in core management roles at listed-company headquarters and business management centers. 6 years of cumulative international HR experience: starting from expatriate personnel administration in 2010, to independently managing compensation and assignment policy design at GCL PV International in 2011; then from 2020 to 2024 at the Geely–Mercedes Smart global JV, independently building end-to-end C&B, performance incentives, international assignment and HRIS systems covering 10+ legal entities across China and Europe. Deep understanding of cross-border employment compliance, overseas compensation design, and full-cycle international assignment management, with proven capability in top-level system design, implementation, and global HR governance at the group level.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Career -->
+<section id="career">
+  <div class="container">
+    <div class="section-label reveal">Career</div>
+    <div class="section-title reveal">职业亮点</div>
+    <div class="tech-divider reveal"></div>
+    <div class="timeline">
+
+      <!-- GCL -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-company">协鑫集团（2004–2020）</div>
+        <div class="timeline-desc">
+          从基层岗位成长为集团总部薪酬高级经理，16年深耕协鑫，全程亲历集团四次重大战略转型，深度理解能源行业业务逻辑、组织基因与人力管理逻辑：先后在光伏材料、光伏国际、电力板块、集团总部任职。
+        </div>
+      </div>
+
+      <!-- Smart -->
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-company">智马达汽车Smart（2020–2024）</div>
+        <div class="timeline-desc">
+          奔驰–吉利全球化合资企业，业务布局中国及以德国为核心的欧洲多国销售子公司。<br/>担任COE激励绩效与共享总监，从零搭建五大HR核心体系：
+        </div>
+        <ul class="timeline-highlights">
+          <li>全球薪酬体系：搭建以中国—德国为核心的区域全球职级薪酬宽带设计、实施中国区员工薪酬诊断与套改；</li>
+          <li>全球国际派遣管理：从零搭建国内+国际派遣管理制度全体系，覆盖外派审批、签证办理、跨境薪酬福利、欧洲属地生活协调与风险处置。</li>
+          <li>全球HRIS系统：以项目经理身份，牵头业务需求梳理、项目蓝图、系统集成、数据迁移与全模块正式上线及持续迭代优化。</li>
+          <li>中国区绩效体系：搭建OKR&amp;KPI双通道考核机制，区分研发/职能/销售差异化考核逻辑，实现全流程线上闭环管理。</li>
+          <li>中国区共享服务中心：统筹全国10个法律实体员工入转调离、员工关系及第三方供应商全域管理。</li>
+          <li>全球ESOP持股计划：依据公司上市规划联合资本、法务、财务及第三方咨询公司，组织全球员工 ESOP 激励工具选择、数据收集、方案制订及报批、授予文书起草及员工授予协议签署。</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Advantages -->
+<section id="advantages" style="background: var(--light-bg);">
+  <div class="container">
+    <div class="section-label reveal">Why Me</div>
+    <div class="section-title reveal">我的优势</div>
+    <div class="tech-divider reveal"></div>
+    <div class="advantage-cards">
+
+      <div class="adv-card reveal">
+        <div class="adv-text">
+          追随协鑫产业升级、全球化布局、集团管控迭代每一次战略变革，深谙协鑫的业务底色、组织文化与人才管理逻辑。
+        </div>
+      </div>
+
+      <div class="adv-card reveal reveal-delay-1">
+        <div class="adv-text">
+          我的国际化HR能力并非后期叠加，而是跟随协鑫的国际化起步阶段就获得了参与机会并持续沉淀，后在smart完成中欧多法律实体的HR模块从0到1的体系交付。
+        </div>
+      </div>
+
+      <div class="adv-card reveal reveal-delay-2">
+        <div class="adv-text">
+          我既是一个协鑫老人更是一个协鑫新人，作为一名电力人，尤其对电力业务有着深厚的情感归属与价值认同，五年外部全球化历练也实现了专业认知与格局的全面提升。<br/>保持谦卑、心存敬畏、持续精进，是我一贯的职业底色与行事准则。
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Closing -->
+<section class="closing">
+  <div class="container">
+    <div class="tech-divider reveal"></div>
+    <div class="closing-text reveal">
+      尊敬的领导，我十分渴望参与协鑫能科新一轮国际业务拓展，愿以深厚的行业积淀、全球化HR专业能力与百分百的忠诚担当，全力以赴贡献价值、共赴发展！
+    </div>
+    <div class="closing-sig reveal">—— <span>徐寒洁</span></div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="contact-title">联系我 / Contact</div>
+    <div class="contact-links">
+      <a class="contact-item" href="mailto:13912623166@139.com">📧 13912623166@139.com</a>
+      <span class="contact-item">📱 13912623166</span>
+    </div>
+  </div>
+</section>
+
+<div class="footer">© 2026 Hanjie Xu</div>
+
+<script>
+// Nav scroll shadow
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 10));
+
+// Reveal on scroll
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>
